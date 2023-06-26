@@ -172,7 +172,7 @@ function update() {
                 timer = (elapsedTime / 1000).toFixed(3);
             }, 100);
             playing = false
-            officialTime = parseFloat(timer)+parseFloat(mistakes)
+            officialTime = Math.round((parseFloat(timer)+parseFloat(mistakes*.25))*1000)/100
             played = true
             mistakes = 0
             //adding new score to highscores
