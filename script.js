@@ -22,6 +22,7 @@ let startTime = ""
 let timer = 0
 let score = 0
 let officialTime = 0
+let mistakes = 0
 
 let highscore = 0
 let highscore2 = 0
@@ -146,18 +147,22 @@ function update() {
         }
         if ((toggledKey == "ArrowDown" || toggledKey == "ArrowLeft" || toggledKey == "ArrowRight") && currentArrow == "up"){
             startTime = startTime-250
+            mistakes +=1
             toggledKey = "";
         }
         if ((toggledKey == "ArrowLeft" || toggledKey == "ArrowRight" || toggledKey == "ArrowUp") && currentArrow == "down"){
             startTime = startTime-250
+            mistakes +=1
             toggledKey = "";
         }
         if ((toggledKey == "ArrowRight" || toggledKey == "ArrowUp" || toggledKey == "ArrowDown") && currentArrow == "left"){
             startTime = startTime-250
+            mistakes +=1
             toggledKey = "";
         }
         if ((toggledKey == "ArrowUp" || toggledKey == "ArrowDown" || toggledKey == "ArrowLeft") && currentArrow == "right"){
             startTime = startTime-250
+            mistakes +=1
             toggledKey = "";
         }
         //if game ends
@@ -167,8 +172,9 @@ function update() {
                 timer = (elapsedTime / 1000).toFixed(3);
             }, 100);
             playing = false
-            officialTime = timer
+            officialTime = parseFloat(timer)+parseFloat(mistakes)
             played = true
+            mistakes = 0
             //adding new score to highscores
             if (highscore == 0){
                 highscore = officialTime
@@ -216,6 +222,7 @@ function update() {
             localStorage.setItem("highscore3", highscore3);
             localStorage.setItem("highscore4", highscore4);
             localStorage.setItem("highscore5", highscore5);
+            officialTime = parseFloat(timer)
         }
     }
 }
